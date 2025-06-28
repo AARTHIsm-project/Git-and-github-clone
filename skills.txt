@@ -1,4 +1,4 @@
-my skills 
-HTML
-CSS
-JavaScript
+Python
+SQL
+Machine Learning
+
