@@ -1,4 +1,2 @@
-my skills 
-HTML
-CSS
-JavaScript
+php
+graphic design
