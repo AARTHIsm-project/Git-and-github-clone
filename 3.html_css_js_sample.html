@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Registration</title> 
+    <link rel="stylesheet" href="style.css">
+  <style>
+   /* * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+    
+    body {
+      height: 100vh;
+      background: linear-gradient(to top, #2b1055, #5f2c82, #9d50bb);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      color: #fff;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(white 1px, transparent 1px),
+        radial-gradient(white 1px, transparent 1px);
+      background-size: 80px 80px, 120px 120px;
+      background-position: 0 0, 40px 60px;
+      opacity: 0.6;
+      z-index: -1;
+    }
+
+    body::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("./img/971.jpg") no-repeat center / cover;
+      opacity: 0.15;
+      z-index: -2;
+    }
+
+    .mountains {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 45%;
+      background: linear-gradient(to top, #1a083d, #3a156a);
+      clip-path: polygon(
+        0 60%, 10% 50%, 20% 55%, 30% 45%, 40% 50%,
+        50% 40%, 60% 48%, 70% 42%, 80% 50%, 90% 45%, 100% 55%, 
+        100% 100%, 0 100%
+      );
+    }
+
+    .register-card {
+      position: relative;
+      z-index: 2;
+      width: 400px;
+      padding: 35px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    .register-card h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      font-weight: 600;
+    }
+
+    .input-group {
+      margin-bottom: 15px;
+    }
+
+    .input-group input,
+    .input-group select {
+      width: 100%;
+      padding: 12px 15px;
+      border-radius: 25px;
+      border: none;
+      outline: none;
+      background: rgba(255,255,255,0.25);
+      color: #fff;
+      font-size: 14px;
+    }
+
+    .input-group input::placeholder {
+      color: #eee;
+    }
+
+    .gender {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .gender label {
+      cursor: pointer;
+    }
+
+    .register-btn {
+      width: 100%;
+      padding: 12px;
+      border-radius: 25px;
+      border: none;
+      background: #fff;
+      color: #5f2c82;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .register-btn:hover {
+      background: #eee;
+    }
+
+    .input-group select {
+      background: rgba(159, 80, 187, 0.5);
+      color: #fff;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      cursor: pointer;
+    }
+
+    .input-group select::-ms-expand {
+      display: none;
+    }
+*/
+  </style>
+</head>
+
+<body>
+
+  <div class="register-card">
+   <h2>Student Registration</h2>
+
+    <div class="input-group">
+      <input type="text" placeholder="Full Name"required>
+    </div>
+
+    <div class="input-group">
+      <input type="email" placeholder="Email Address"required>
+    </div>
+
+    <div class="input-group">
+      <input type="password" placeholder="Password"required>
+    </div>
+
+    <div class="input-group">
+      <input type="password" placeholder="Confirm Password"required>
+    </div>
+
+    <div class="gender"required>
+      <label><input type="radio" name="gender" value="Male"> Male</label>  
+      <label><input type="radio" name="gender" value="Female"> Female</label>
+    </div>
+
+    <div class="input-group">
+      <select required>
+        <option selected disabled>Select Course</option>
+        <option>BCA</option>
+        <option>BSc CS</option>
+        <option>B.Tech</option>
+        <option>MCA</option>
+      </select>     
+    </div>
+
+    <button class="register-btn">Register</button>
+    <!--<button class="register-btn"style="
+      width:100%;
+      padding:12px;
+      background:#667eea;
+      color:white;
+      border:none;
+      border-radius:10px;
+      font-size:16px;
+      cursor:pointer;
+    ">
+      Register
+    </button>--->
+  </div>
+
+  <div class="mountains"></div>
+
+ <script>
+const registerBtn = document.querySelector('.register-btn');
+const fullName = document.querySelector('input[type="text"]');
+const email = document.querySelector('input[type="email"]');
+const password = document.querySelector('input[placeholder="Password"]');
+const confirmPassword = document.querySelector('input[placeholder="Confirm Password"]');
+const genderInputs = document.querySelectorAll('input[name="gender"]');
+const courseSelect = document.querySelector('select');
+
+registerBtn.addEventListener('click', (e) => {
+  e.preventDefault();// Stop form from submitting automatically
+
+  // Regex patterns  regular expressions
+  const nameRegex = /^[a-zA-Z\s]+$/;
+  const emailRegex = /^[a-z0-9._%+-]+@gmail\.com$/;
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,12}$/; // <-- define it here
+
+  // Required checks
+  if (!fullName.value.trim()) { alert("Full Name is required!"); fullName.focus(); return; }
+  if (!email.value.trim()) { alert("Email is required!"); email.focus(); return; }
+  if (!password.value.trim()) { alert("Password is required!"); password.focus(); return; }
+  if (!confirmPassword.value.trim()) { alert("Confirm Password is required!"); confirmPassword.focus(); return; }
+
+  const genderSelected = Array.from(genderInputs).some(input => input.checked);
+  if (!genderSelected) { alert("Please select your gender!"); return; }
+
+  if (courseSelect.selectedIndex === 0) { alert("Please select a course!"); return; }
+
+  // Regex validations
+  if (!nameRegex.test(fullName.value)) { alert("Name must contain only letters and spaces!"); return; }
+  if (!emailRegex.test(email.value.toLowerCase())) { alert("Email must be lowercase and a valid Gmail address!"); return; }
+  if (!passwordRegex.test(password.value)) { 
+    alert("Password must contain at least 1 uppercase, 1 lowercase, 1 number, 6-12 characters!"); 
+    return; 
+  }
+  if (confirmPassword.value !== password.value) { alert("Confirm Password must match Password!"); return; }
+
+  // Success
+  alert(`Registration Successful!\nName: ${fullName.value}\nEmail: ${email.value}\nCourse: ${courseSelect.value}`);
+
+  // Reset form
+  fullName.value = '';
+  email.value = '';
+  password.value = '';
+  confirmPassword.value = '';
+  genderInputs.forEach(input => input.checked = false);
+  courseSelect.selectedIndex = 0;
+});
+
+// Live input restrictions
+fullName.addEventListener('input', () => { fullName.value = fullName.value.replace(/[^a-zA-Z\s]/g, ''); });
+email.addEventListener('input', () => { email.value = email.value.toLowerCase(); });
+password.addEventListener('input', () => { if (password.value.length > 12) password.value = password.value.slice(0, 12); });
+confirmPassword.addEventListener('input', () => { if (confirmPassword.value.length > 12) confirmPassword.value = confirmPassword.value.slice(0, 12); });
+</script>
+
+</body>
+</html>
